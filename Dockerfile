@@ -1,11 +1,8 @@
-FROM python:3.6-alpine
-RUN apk add --no-cache git \
-	&& pip3 install --no-cache-dir --upgrade pytest flake8 \
-	&& pip3 install --no-cache-dir --upgrade --force-reinstall git+git://github.com/keboola/python-docker-application.git@2.0.1
+FROM alpine:3.6
 
+RUN mkdir -p /data/in/tables /data/out/tables
 WORKDIR /code
-
 COPY . /code/
 
 # Run the application
-CMD python3 -u ./src/main.py
+CMD /bin/sh /code/main.sh
